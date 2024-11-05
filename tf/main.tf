@@ -38,9 +38,12 @@ module "gke"{
 }
 
 module "sql"{
-  source  = "./module/gke"
+  source  = "./module/sql"
   region  = var.region
+  project_name  = var.project_name
   vpc_name  = module.vpc.vpc_name
   db_usr  = var.db_usr
   db_pws  = var.db_pws
+  vpc_network_self_link  = module.vpc.network_self_link
+  subnet_name = module.vpc.subnet_name
 }
