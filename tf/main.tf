@@ -37,3 +37,10 @@ module "gke"{
   service_account = var.service_account
 }
 
+module "sql"{
+  source  = "./module/gke"
+  region  = var.region
+  vpc_name  = module.vpc.vpc_name
+  db_usr  = var.db_usr
+  db_pws  = var.db_pws
+}

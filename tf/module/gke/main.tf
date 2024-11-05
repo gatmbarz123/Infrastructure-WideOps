@@ -7,6 +7,7 @@ resource "google_container_cluster" "gke" {
   network         = var.vpc_name
   subnetwork      = var.subnet_name
 
+  deletion_protection = false
   remove_default_node_pool = true
   initial_node_count       = 1
 
@@ -30,7 +31,6 @@ resource "google_container_cluster" "gke" {
     master_ipv4_cidr_block  = "172.16.0.0/28"
   }
 }
-
 
 resource "google_container_node_pool" "general" {
   name       = "general"
@@ -56,4 +56,18 @@ resource "google_container_node_pool" "general" {
       "https://www.googleapis.com/auth/cloud-platform"
     ]
   }
+}
+
+resource "google_compute_firewall" "allow_http" {
+  name    = "allow-http"
+  network = var.vpc_name
+
+  allow {
+    protocol = "tcp"
+    ports    = ["80","443","3306"]
+  }
+
+  source_ranges = ["0.0.0.0/0"] 
+  
+  
 }

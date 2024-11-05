@@ -31,15 +31,9 @@ module "vpc" {
         ]
   }
 
-  routes = [
-    {
-      name              = "egress-internet"
-      description       = "Default route through IGW to access internet"
-      destination_range = "0.0.0.0/0"
-      next_hop_internet = "true"
-    }
-  ]
 }
+
+#----------------------------------------------------------------------------------#
 
 module "cloud_router" {
   source  = "terraform-google-modules/cloud-router/google"
@@ -57,3 +51,5 @@ module "cloud_router" {
     source_subnetwork_ip_ranges_to_nat = "ALL_SUBNETWORKS_ALL_IP_RANGES"
   }]
 }
+
+

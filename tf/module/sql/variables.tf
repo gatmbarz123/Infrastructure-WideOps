@@ -8,13 +8,8 @@ variable "project_name" {
    type        = string
 }
 
-variable "service_account" {
+variable "vpc_name" {
    description = "google cloud vpc_name"
-   type        = string
-}
-
-variable "key" {
-   description = "google cloud key for credentials"
    type        = string
 }
 
